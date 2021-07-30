@@ -86,7 +86,8 @@ class MainActivity : AppCompatActivity(), StopwatchListener, LifecycleObserver {
         val newTimers = mutableListOf<Stopwatch>()
         stopwatches.forEach {
             if (it.id == id) {
-                newTimers.add(Stopwatch(it.id, it.startMs, it.finishMs, it.currentMs, isStarted))
+                val newFinishMs = System.currentTimeMillis() + it.currentMs
+                newTimers.add(Stopwatch(it.id, it.startMs, newFinishMs, it.currentMs, isStarted))
             } else if (it.id != id && it.isStarted) {
                 newTimers.add(Stopwatch(it.id, it.startMs, it.finishMs, it.currentMs, false))
             } else {
